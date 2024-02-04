@@ -5,3 +5,6 @@ sources:
     schema: public
     tables:
       - name: customers
+      - name: suppliers
+      - name: shippers
+      - name: categories

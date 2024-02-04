@@ -1,1 +1,6 @@
-select contact_name, address, phone from customers
+select 
+    contact_name
+    , address
+    , phone 
+from 
+    {{ source('postgres', 'customers') }}

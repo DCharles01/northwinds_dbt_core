@@ -6,7 +6,7 @@ WITH transformed_categories as (
     , lower(category_name)
     , description 
   from 
-    categories
+    {{ source('postgres', 'categories') }}
 )
 
 SELECT * FROM transformed_categories

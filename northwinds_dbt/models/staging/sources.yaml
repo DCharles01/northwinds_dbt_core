@@ -8,3 +8,15 @@ sources:
       - name: suppliers
       - name: shippers
       - name: categories
+
+  # AWS RDS
+  - name: rds
+    database: northwinds
+    schema: public
+    tables:
+      - name: customers
+      - name: suppliers
+      - name: shippers
+      - name: categories
+
+    

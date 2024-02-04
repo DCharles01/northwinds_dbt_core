@@ -1,7 +1,7 @@
 
 
 with source as (
-    select * from {{ source('postgres', 'customers') }}
+    select * from {{ source('rds', 'customers') }}
 ),
 
 renamed as (

@@ -2,7 +2,7 @@ with source as (
     select
         *
     from
-        {{ source('postgres', 'suppliers')}}
+        {{ source('rds', 'suppliers')}}
 ),
 clean_phone as (
     select

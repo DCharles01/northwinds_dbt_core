@@ -1,12 +1,12 @@
-name: dbt Tests
+name: Run dbt Tests
 
 on:
   push:
     branches:
-      - main
+      - main  # Change this to your main branch
 
 jobs:
-  dbt_tests:
+  run-dbt-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,14 +16,24 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: '3.x'  # Use the desired Python version
 
+      - name: Install ngrok
+        run: |
+          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+          unzip ngrok-stable-linux-amd64.zip
+
+      - name: Expose Local Database
+        run: ./ngrok tcp 5432
+        
       - name: Install dbt
         run: |
           pip install dbt
 
-      - name: Run dbt Tests
+      - name: Set up dbt profiles.yml
         run: |
-          dbt debug
-          dbt run
-          dbt test
+          mkdir -p $HOME/.dbt
+          echo "$DBT_PROFILES_YML" > $HOME/.dbt/profiles.yml
+
+      - name: Run dbt tests
+        run: dbt test

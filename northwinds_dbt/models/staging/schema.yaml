@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_categories
+    description: 'Categories'
+    columns:
+      - name: category_id
+        tests:
+          - not_null:
+              severity: ERROR
+
+  - name: stg_customers
+    description: 'Customers'
+    columns:
+      - name: contact_name
+        tests:
+          - not_null:
+              severity: ERROR
+  
+  - name: stg_shippers
+    description: 'Shippers'
+    columns:
+      - name: shipper_id
+        tests:
+          - not_null:
+              severity: ERROR
+          - unique:
+              severity: ERROR
+
+  - name: stg_rds_companies
+    description: 'RDS Companies'
+    columns:
+      - name: company_id
+        tests:
+          - not_null:
+              severity: ERROR
+          - unique:
+              severity: ERROR
+  
+  - name: stg_rds_customers
+    description: 'RDS Customers'
+    columns:
+      - name: customer_id
+        tests:
+          - not_null:
+              severity: ERROR
+  
+  - name: stg_rds_suppliers
+    description: 'RDS Suppliers'
+    columns:
+      - name: supplier_id
+        tests:
+          - not_null:
+              severity: ERROR
+      - name: phone
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: '^\(\d{3}\) \d{3}-\d{4}$'
+              row_condition: "phone is not null"
+            

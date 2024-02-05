@@ -1,4 +1,3 @@
--- models/example_model.sql
 WITH customers AS (
     SELECT * FROM {{ source('rds', 'customers')}}
     {% set name_parts = "contact_name" %}

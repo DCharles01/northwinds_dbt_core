@@ -18,6 +18,14 @@ jobs:
         with:
           python-version: '3.x'  # Use the desired Python version
 
+      - name: Install ngrok
+        run: |
+          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+          unzip ngrok-stable-linux-amd64.zip
+
+      - name: Expose Local Database
+        run: ./ngrok tcp 5432
+        
       - name: Install dbt
         run: |
           pip install dbt

@@ -27,8 +27,5 @@ jobs:
           mkdir -p $HOME/.dbt
           echo "$DBT_PROFILES_YML" > $HOME/.dbt/profiles.yml
 
-      - name: Run dbt
-        run: dbt run
-
       - name: Run dbt tests
         run: dbt test

@@ -1,0 +1,29 @@
+name: dbt Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dbt_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dbt
+        run: |
+          pip install dbt
+
+      - name: Run dbt Tests
+        run: |
+          dbt debug
+          dbt run
+          dbt test

@@ -4,7 +4,7 @@ WITH source AS (
 
 , renamed AS (
     SELECT
-        concat('rds-', company_name) company_id
+        {{ derive_company_id('company_name', 'rds-') }} company_id
         , company_name
         , max(address) as address
         , max(city) as city

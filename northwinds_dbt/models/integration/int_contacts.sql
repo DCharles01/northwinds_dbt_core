@@ -7,7 +7,7 @@ with merged_contacts as
     , phone
     , company_id
 from
-	dev.stg_rds_customers
+	{{ ref('stg_rds_customers') }}
 union all
 select
 	contact_id as hubspot_contact_id
@@ -17,7 +17,7 @@ select
     , phone
     , company_id
 from
-	dev.stg_hubspot_contacts
+	{{ ref('stg_hubspot_contacts') }}
 ),
 
 
@@ -33,7 +33,7 @@ select
     , null as hubspot_company_id
     , company_id as rds_company_id
 from
-	dev.stg_rds_customers
+	{{ ref('stg_rds_customers') }}
 union all
 select
 	contact_id as hubspot_contact_id
@@ -44,7 +44,7 @@ select
     , company_id as hubspot_company_id
     , null as rds_company_id
 from
-	dev.stg_hubspot_contacts
+	{{ ref('stg_hubspot_contacts') }}
 
 ), 
 
@@ -54,7 +54,7 @@ select
 	, max(rds_contact_id) as rds_contact_id
 	, first_name
 	, last_name
-	, max(phone)
+	, max(phone) as phone
 	, max(hubspot_company_id) as hubspot_company_id
 	, max(rds_company_id) as rds_company_id
 from

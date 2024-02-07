@@ -1,0 +1,9 @@
+version: 2
+models:
+  - name: stg_hubspot_companies
+    columns:
+      - name: company_id
+        description: Unique company id
+        tests:
+          - not_null
+          - unique

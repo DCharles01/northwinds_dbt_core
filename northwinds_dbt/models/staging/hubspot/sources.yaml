@@ -1,0 +1,13 @@
+version: 2
+sources:
+  - name: hubspot
+    database: northwinds
+    schema: dev
+    tables:
+      - name: northwinds_hubspot
+        columns:
+          - name: hubspot_id
+            description: Hubspot ID
+            tests:
+              - not_null
+

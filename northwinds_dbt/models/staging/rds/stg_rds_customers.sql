@@ -19,7 +19,7 @@ renamed AS (
             {%- endif -%}
             
         {% endfor %}
-        , replace(translate(phone, '(,),-,.', ''), ' ', '') as updated_phone
+        , phone
         , companies.company_id
     FROM
         customers
@@ -27,27 +27,16 @@ renamed AS (
         companies ON customers.company_name = companies.company_name
 ), 
 
-clean_phone as (
+clean_format_phone as (
 
     select
         customer_id
         , first_name
         , last_name
-        , {{ clean_phone_number('updated_phone') }} as cleaned_phone
+        , {{ format_phone_number('phone') }} as phone
         , company_id
     from 
         renamed
-),
-
-format_phone as (
-    select
-        customer_id
-        , first_name
-        , last_name
-        , {{ format_phone_number('cleaned_phone') }} as formatted_phone
-        , company_id
-    from
-        clean_phone
 ),
 
 final as (
@@ -55,10 +44,10 @@ final as (
         customer_id
         , first_name
         , last_name
-        , formatted_phone as phone
+        , phone
         , company_id
     
-    from format_phone
+    from clean_format_phone
 )
 
 SELECT * FROM final

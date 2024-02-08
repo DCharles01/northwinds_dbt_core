@@ -4,7 +4,7 @@ with source as (
 
 select
     max({{ derive_company_id('business_name', 'hubspot-') }}) as company_id
-    , business_name as business_name
+    , business_name as name
 from
     source
 group by

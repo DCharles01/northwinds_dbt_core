@@ -11,7 +11,7 @@ cleaned_format_phone_number as (
         , first_name
         , last_name
         , {{ format_phone_number('phone') }} as phone
-        , business_name
+        , business_name as name
     from
         source
 ),
@@ -27,7 +27,7 @@ select
 from
 	cleaned_format_phone_number as hubspot_contacts
 inner join
-	{{ ref('stg_hubspot_companies') }} hubspot_companies on hubspot_contacts.business_name=hubspot_companies.business_name
+	{{ ref('stg_hubspot_companies') }} hubspot_companies on hubspot_contacts.name=hubspot_companies.name
 
 ),
 

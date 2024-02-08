@@ -24,7 +24,7 @@ renamed AS (
     FROM
         customers
     INNER JOIN
-        companies ON customers.company_name = companies.company_name
+        companies ON customers.company_name = companies.name
 ), 
 
 clean_format_phone as (

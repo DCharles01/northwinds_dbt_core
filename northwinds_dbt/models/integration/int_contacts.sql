@@ -66,4 +66,8 @@ order by
 	last_name
 
 )
-select * from deduped
+select 
+    {{ dbt_utils.generate_surrogate_key(['first_name', 'last_name', 'phone']) }} as contact_pk
+    , * 
+from
+    deduped

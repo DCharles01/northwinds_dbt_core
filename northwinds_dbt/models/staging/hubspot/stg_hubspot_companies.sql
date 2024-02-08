@@ -3,7 +3,7 @@ with source as (
 )
 
 select
-    max({{ derive_company_id('business_name', 'hubspot-') }}) as company_id
+    max({{ append_prefix_source('business_name', 'hubspot-') }}) as company_id
     , business_name as name
 from
     source

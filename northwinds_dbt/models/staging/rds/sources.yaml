@@ -18,5 +18,7 @@ sources:
       - name: suppliers
       - name: shippers
       - name: categories
+      - name: orders
+      - name: order_details
 
     

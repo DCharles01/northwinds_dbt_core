@@ -4,7 +4,7 @@ WITH source AS (
 
 , renamed AS (
     SELECT
-        {{ derive_company_id('company_name', 'rds-') }} company_id
+        {{ append_prefix_source('company_name', 'rds-') }} company_id
         , company_name as name
         , max(address) as address
         , max(city) as city
